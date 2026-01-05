@@ -1,0 +1,56 @@
+mutation CreateNewFoodItem($name: String!, $description: String, $calories: Int, $carbs: Float, $fat: Float, $protein: Float, $commonAllergens: [String], $imageUrl: String) @auth(level: USER) {
+  foodItem_insert(data: {
+    name: $name
+    description: $description
+    calories: $calories
+    carbs: $carbs
+    fat: $fat
+    protein: $protein
+    commonAllergens: $commonAllergens
+    createdAt_expr: "request.time"
+    imageUrl: $imageUrl
+  })
+}
+
+query ListPublicRecipes @auth(level: PUBLIC, insecureReason: "This query is safe to expose to the public") {
+  recipes(where: {isPublic: {eq: true}}) {
+    id
+    name
+    description
+    imageUrl
+  }
+}
+
+mutation LogMeal($foodItemId: UUID, $recipeId: UUID, $logDate: Timestamp!, $mealType: String!, $notes: String, $quantityConsumed: Float, $servingSize: Int) @auth(level: USER) {
+  mealLog_insert(data: {
+    foodItemId: $foodItemId
+    recipeId: $recipeId
+    userId_expr: "auth.uid"
+    logDate: $logDate
+    mealType: $mealType
+    notes: $notes
+    quantityConsumed: $quantityConsumed
+    servingSize: $servingSize
+  })
+}
+
+query GetMyMealLogs @auth(level: USER) {
+  mealLogs(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    logDate
+    mealType
+    notes
+    quantityConsumed
+    servingSize
+    foodItem {
+      id
+      name
+      description
+    }
+    recipe {
+      id
+      name
+      description
+    }
+  }
+}
