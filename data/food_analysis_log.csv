@@ -1,0 +1,26 @@
+timestamp,image_filename,preparation_time,package_time,classification,decision,risk_level,confidence,reasoning_summary,advisory,error
+2026-01-02T14:02:52.382647,dos.jpg,2026-01-02T14:02,2026-01-02T14:50,NOT-EDIBLE,DISCARD,HIGH,0.0,Analysis failed due to response parsing error: Unterminated string starting at: line 7 column 30 (char 162),Manual review required - automated analysis failed,True
+2026-01-02T14:05:10.487798,dos.jpg,2026-01-02T14:04,2026-01-02T14:50,NOT-EDIBLE,DISCARD,HIGH,0.0,Analysis failed due to response parsing error: Unterminated string starting at: line 7 column 30 (char 173),Manual review required - automated analysis failed,True
+2026-01-02T14:07:40.150941,dos.jpg,2026-01-02T14:07,2026-01-02T14:30,EDIBLE,SAFE_WITH_ADVISORY,MODERATE,0.9,Analysis completed,,False
+2026-01-02T14:24:50.025339,dos.jpg,2026-01-02T14:24,2026-01-02T14:50,EDIBLE,SAFE_WITH_ADVISORY,MODERATE,0.85,Analysis completed,,False
+2026-01-03T04:08:25.401Z,dos.jpg,2026-01-03T09:38,2026-01-03T10:00,NOT-EDIBLE,DISCARD,HIGH,0,"Analysis failed due to error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name ""responseMimeType"" at 'generation_config': Cannot find field. [{""@type"":""type.googleapis.com/google.rpc.BadRequest"",""fieldViolations"":[{""field"":""generation_config"",""description"":""Invalid JSON payload received. Unknown name \""responseMimeType\"" at 'generation_config': Can...",Manual review required - automated analysis failed,true
+2026-01-03T04:12:35.830Z,dos.jpg,2026-01-03T09:42,2026-01-03T10:00,EDIBLE,SAFE_FOR_DONATION,LOW,0.8,Analysis completed,,false
+2026-01-03T04:26:48.971Z,dos.jpg,2026-01-03T09:55,2026-01-03T10:30,NOT-EDIBLE,DISCARD,HIGH,0.9,Analysis completed,,false
+2026-01-03T04:29:37.927Z,dos.jpg,2026-01-03T09:55,2026-01-03T10:30,NOT-EDIBLE,DISCARD,HIGH,1,Analysis completed,,false
+2026-01-03T04:30:25.644Z,dos.jpg,2026-01-03T10:00,2026-01-03T10:40,EDIBLE,SAFE_WITH_ADVISORY,MODERATE,0.85,Analysis completed,,false
+2026-01-03T04:31:51.438Z,dos.jpg,2026-01-03T10:01,2026-01-03T10:40,NOT-EDIBLE,DISCARD,VERY_HIGH,1,Analysis completed,,false
+2026-01-03T04:43:55.751Z,dos.jpg,2026-01-03T10:13,2026-01-03T10:46,NOT-EDIBLE,DISCARD,HIGH,0,Analysis failed due to error: Could not extract valid JSON from response,Manual review required - automated analysis failed,true
+2026-01-03T04:47:46.956Z,dos.jpg,2026-01-03T10:17,2026-01-03T10:35,EDIBLE,SAFE_WITH_ADVISORY,MODERATE,0.9,{},,false
+2026-01-03T04:48:08.208Z,dos.jpg,2026-01-03T10:17,2026-01-03T10:35,EDIBLE,SAFE_WITH_ADVISORY,MODERATE,0.85,{},,false
+2026-01-03T04:50:11.907Z,dos.jpg,2026-01-03T10:17,2026-01-03T10:35,NOT-EDIBLE,DISCARD,HIGH,0.9,{},,false
+2026-01-03T04:55:37.698Z,dos.jpg,2026-01-03T10:25,2026-01-03T10:45,EDIBLE,SAFE_WITH_ADVISORY,MODERATE,0.9,{},,false
+2026-01-03T05:03:22.617Z,dos.jpg,2026-01-03T10:32,2026-01-03T10:45,EDIBLE,SAFE_WITH_ADVISORY,MODERATE,0.9,{},,false
+2026-01-03T05:05:02.231Z,dos.jpg,2026-01-03T10:34,2026-01-03T10:45,EDIBLE,SAFE_WITH_ADVISORY,MODERATE,0.9,{},,false
+2026-01-03T05:25:06.859Z,dos.jpg,2026-01-03T10:54,2026-01-03T11:10,EDIBLE,SAFE_FOR_DONATION,LOW,0.9,{},,false
+2026-01-03T06:28:31.782Z,Masala-dosa-1.webp,2026-01-03T11:57,2026-01-03T00:13,NOT-EDIBLE,DISCARD,VERY_HIGH,0.95,{},,false
+2026-01-03T06:30:10.240Z,Masala-dosa-1.webp,2026-01-03T11:59,2026-01-03T12:15,EDIBLE,SAFE_FOR_DONATION,LOW,0.95,{},,false
+2026-01-03T07:01:13.032Z,Masala-dosa-1.webp,2026-01-03T12:30,2026-01-03T12:50,EDIBLE,SAFE_FOR_DONATION,LOW,0.95,{},,false
+2026-01-03T07:02:49.416Z,bana.jpg,2026-01-03T12:32,2026-01-03T12:45,NOT-EDIBLE,DISCARD,HIGH,0.95,{},,false
+2026-01-03T07:04:59.621Z,Masala-dosa-1.webp,2026-01-03T12:33,2026-01-03T13:04,EDIBLE,SAFE_FOR_DONATION,LOW,0.95,"The food is in optimal condition for donation, having been prepared and packaged just 0.0 hours ago. Visually, it is fresh and shows no signs of spoilage. While some components are high-risk, the minimal elapsed time ensures safety under the 2-hour rule. Proper food-grade packaging and immediate distribution with temperature control are crucial next steps for actual donation.",,false
+2026-01-03T08:26:36.962Z,Masala-dosa-1.webp,2026-01-03T13:56,2026-01-03T14:09,EDIBLE,SAFE_FOR_DONATION,LOW,0.95,{},,false
+2026-01-05T05:12:21.462Z,download (2).jpg,2026-01-05T10:42,2026-01-05T10:42,EDIBLE,SAFE_FOR_DONATION,LOW,0.95,"Based on the visual inspection, the food appears fresh and free from any signs of spoilage. It is a high-risk food, but the critical factor of time-temperature control is met, as it was prepared only 0.0 hours ago, well within the FSSAI's 2-hour safe limit for donation. Therefore, it is safe for immediate donation and consumption.",,false
