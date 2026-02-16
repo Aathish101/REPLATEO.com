@@ -31,18 +31,17 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow non-browser requests
+    if (!origin) return callback(null, true);
 
     if (
-      allowedOrigins.includes(origin) ||
-      origin.endsWith(".vercel.app") // allow Vercel preview URLs
+      origin.includes("vercel.app") ||
+      origin.includes("localhost")
     ) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
+      return callback(null, true);
     }
+
+    callback(new Error("Not allowed by CORS"));
   },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
 
