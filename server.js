@@ -28,7 +28,6 @@ const allowedOrigins = [
   "http://127.0.0.1:5174",
   "https://replateo.vercel.app"
 ];
-
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
@@ -37,6 +36,7 @@ app.use(cors({
       origin.includes("vercel.app") ||
       origin.includes("localhost")
     ) {
+
       return callback(null, true);
     }
 
@@ -45,8 +45,12 @@ app.use(cors({
   credentials: true
 }));
 
+
+
+
 // 🔥 IMPORTANT for preflight
-app.options("*", cors());
+
+
 
 
 /* =========================
