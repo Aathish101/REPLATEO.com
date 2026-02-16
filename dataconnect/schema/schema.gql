@@ -1,0 +1,51 @@
+type User @table {
+  displayName: String!
+  email: String!
+  createdAt: Timestamp!
+  photoUrl: String
+  dietaryPreferences: [String]
+  allergies: [String]
+}
+
+type FoodItem @table {
+  name: String!
+  createdAt: Timestamp!
+  description: String
+  imageUrl: String
+  calories: Int
+  protein: Float
+  fat: Float
+  carbs: Float
+  commonAllergens: [String]
+}
+
+type Recipe @table {
+  user: User
+  name: String!
+  instructions: String!
+  createdAt: Timestamp!
+  description: String
+  imageUrl: String
+  prepTime: String
+  cookTime: String
+  servings: Int
+  isPublic: Boolean
+}
+
+type RecipeIngredient @table(key: ["recipe", "foodItem"]) {
+  recipe: Recipe!
+  foodItem: FoodItem!
+  quantity: Float!
+  unit: String!
+}
+
+type MealLog @table {
+  user: User!
+  foodItem: FoodItem
+  recipe: Recipe
+  logDate: Timestamp!
+  mealType: String!
+  notes: String
+  quantityConsumed: Float
+  servingSize: Int
+}

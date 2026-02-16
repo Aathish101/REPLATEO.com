@@ -1,0 +1,105 @@
+/* =========================
+   Global reset & base
+   ========================= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Remove default browser spacing and ensure consistent box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body base — let ThemeContext toggle classes on <body> */
+body {
+  min-height: 100vh;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease;
+  background-color: #f9fafb; /* neutral by default */
+}
+
+/* Page container helpers (use in pages) */
+.page-container {
+  @apply w-full max-w-7xl mx-auto px-6;
+}
+
+.page-section {
+  /* Top padding keeps content below the navbar */
+  @apply w-full min-h-screen pt-24 pb-20;
+}
+
+/* Small utility to center items vertically if needed */
+.center-vert {
+  @apply flex items-center justify-center;
+}
+
+/* =========================
+   Theme backgrounds (applied to <body>)
+   - theme-edible: orange
+   - theme-nonedible: green
+   - theme-neutral: light neutral
+   ========================= */
+.theme-edible {
+  background-color: #fff7ed; /* tailwind orange-50 */
+}
+
+.theme-nonedible {
+  background-color: #ecfdf5; /* tailwind emerald-50 */
+}
+
+.theme-neutral {
+  background-color: #f9fafb; /* tailwind gray-50 */
+}
+
+/* =========================
+   Toast animations & helpers
+   ========================= */
+
+/* Entrance / exit keyframes */
+@keyframes toastIn {
+  0% { opacity: 0; transform: translateY(-10px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toastOut {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-10px) scale(0.97); }
+}
+
+.animate-toast-in {
+  animation: toastIn 260ms cubic-bezier(.2,.8,.2,1) forwards;
+}
+.animate-toast-out {
+  animation: toastOut 200ms ease-in forwards;
+}
+
+/* Optional toast shadow style */
+.toast-card {
+  @apply rounded-xl shadow-lg text-white min-w-[240px] max-w-[380px] px-4 py-3 flex items-center gap-3;
+}
+
+/* =========================
+   Small UI helpers
+   ========================= */
+
+/* card heading */
+.card-heading {
+  @apply text-xl font-bold text-gray-900;
+}
+
+/* subtle page separator line used under nav if needed */
+.page-divider {
+  @apply w-full h-[1px] bg-gray-200 shadow-sm;
+}
+
+/* small fade-in animation (used by modals etc) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 200ms ease-out;
+}
