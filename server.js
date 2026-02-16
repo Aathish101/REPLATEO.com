@@ -27,8 +27,12 @@ app.use(cors({
     "http://127.0.0.1:5173",
     "http://localhost:5174",
     "http://127.0.0.1:5174",
+    "https://replateo.vercel.app"
   ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -68,6 +72,9 @@ try {
   console.warn("Error:", error.message);
 }
 
+app.get("/", (req, res) => {
+  res.send("🚀 REPLATEO Backend is running successfully!");
+});
 
 /* =========================
    ✅ HEALTH
