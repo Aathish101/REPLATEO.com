@@ -21,21 +21,34 @@ const PORT = Number(process.env.PORT) || 5000;
 /* =========================
    🔧 MIDDLEWARE
 ========================= */
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:5174",
+  "http://127.0.0.1:5174",
+  "https://replateo.vercel.app"
+];
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5174",
-    "https://replateo.vercel.app"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow non-browser requests
+
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.endsWith(".vercel.app") // allow Vercel preview URLs
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
 
+// 🔥 IMPORTANT for preflight
+app.options("*", cors());
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 /* =========================
    📦 MULTER
