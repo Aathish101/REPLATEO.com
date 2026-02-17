@@ -18,6 +18,8 @@ console.log(`📧 Configured Email: ${process.env.EMAIL_USER ? process.env.EMAIL
 const app = express();
 const PORT = Number(process.env.PORT) || 5000;
 
+app.use(express.json());
+
 /* =========================
    🔧 MIDDLEWARE
 ========================= */
@@ -73,19 +75,17 @@ const serviceAccountPath = "./serviceAccountKey.json";
 
 try {
   const serviceAccount = JSON.parse(
-    await readFile(new URL(serviceAccountPath, import.meta.url))
+    await readFile(serviceAccountPath, "utf-8")
   );
 
- if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
-}
 
-  console.log("✅ Firebase Admin Initialized");
+  console.log("🔥 Firebase Admin Initialized");
 } catch (error) {
-  console.warn("⚠️ Firebase Admin NOT initialized. Password reset will fail until serviceAccountKey.json is added.");
-  console.warn("Error:", error.message);
+  console.warn("⚠️ Firebase Admin NOT initialized.");
+  console.warn(error.message);
 }
 
 app.get("/", (req, res) => {
@@ -115,7 +115,7 @@ app.post("/api/send-otp", async (req, res) => {
     await sendOTPEmail(email, otp);
     res.json({ success: true, message: "OTP sent successfully" });
   } catch (err) {
-    console.error("❌ Email error:", err);
+console.error("❌ Email error FULL:", err.response || err);
     res.status(500).json({ message: "Failed to send OTP" });
   }
 });
@@ -241,5 +241,5 @@ app.post("/api/analyze-food", upload.single("image"), async (req, res) => {
    🚀 START
 ========================= */
 app.listen(PORT, () => {
-  console.log(`✅ Backend running on http://localhost:${PORT}`);
+console.log(`✅ Backend running on port ${PORT}`);
 });
