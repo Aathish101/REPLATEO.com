@@ -31,19 +31,12 @@ const allowedOrigins = [
   "https://replateo.vercel.app"
 ];
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-
-    if (
-      origin.includes("vercel.app") ||
-      origin.includes("localhost")
-    ) {
-
-      return callback(null, true);
-    }
-
-    callback(new Error("Not allowed by CORS"));
-  },
+  origin: [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://replateo-app.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
