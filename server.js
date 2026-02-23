@@ -229,7 +229,21 @@ app.post("/api/analyze-food", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+app.get("/api/reverse-geocode", async (req, res) => {
+  const { lat, lng } = req.query;
 
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`
+    );
+
+    const data = await response.json();
+
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch address" });
+  }
+});
 /* =========================
    🚀 START
 ========================= */
