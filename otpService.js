@@ -1,19 +1,8 @@
-import nodemailer from "nodemailer";
+import axios from "axios";
 import crypto from "crypto";
 
 /* =======================
-   GMAIL TRANSPORTER
-======================= */
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-/* =======================
-   OTP STORE (TEMP)
+   OTP STORE (TEMP MEMORY)
 ======================= */
 const otpStore = new Map();
 
@@ -25,36 +14,37 @@ export const generateOTP = () => {
 };
 
 /* =======================
-   SEND OTP EMAIL
+   SEND OTP EMAIL (EmailJS)
 ======================= */
-export const sendOTPEmail = async (email, otp) => {
+export const sendOTPEmail = async (email) => {
   const normalizedEmail = email.toLowerCase();
+  const otp = generateOTP();
 
   try {
-    console.log(`📡 Sending OTP via Gmail to ${normalizedEmail}`);
+    console.log(`📡 Sending OTP via EmailJS to ${normalizedEmail}`);
 
-    await transporter.sendMail({
-      from: `"Replateo" <${process.env.EMAIL_USER}>`,
-      to: normalizedEmail,
-      subject: "Your Replateo Verification Code",
-      html: `
-        <h2 style="color:#f97316;">Replateo Verification</h2>
-        <p>Your OTP is:</p>
-        <h1 style="letter-spacing:5px;">${otp}</h1>
-        <p>This OTP is valid for 10 minutes.</p>
-      `,
+    await axios.post("https://api.emailjs.com/api/v1.0/email/send", {
+      service_id: "service_rg5bxkl",
+      template_id: "template_r3o43qd",
+      public_key: "PajnyyFUlfT4OCAAF",
+      template_params: {
+        to_email: normalizedEmail,
+        otp: otp,
+        time: "15 minutes",
+      },
     });
 
     otpStore.set(normalizedEmail, {
-      otp: otp.toString(),
-      expires: Date.now() + 10 * 60 * 1000,
+      otp,
+      expires: Date.now() + 15 * 60 * 1000,
     });
 
-    console.log("✅ OTP sent successfully via Gmail");
+    console.log("✅ OTP sent successfully via EmailJS");
+    return true;
 
   } catch (error) {
-    console.error("❌ Gmail OTP Error:", error);
-    throw new Error("OTP_EMAIL_FAILED");
+    console.error("❌ EmailJS OTP Error:", error.response?.data || error.message);
+    return false;
   }
 };
 
