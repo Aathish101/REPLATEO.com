@@ -25,7 +25,7 @@ export const sendOTPEmail = async (email, otp) => {
     console.log(`📡 Sending OTP via Resend to ${normalizedEmail}`);
 
     await resend.emails.send({
-      from: "onboarding@resend.dev",
+from: "onboarding@resend.dev",
       to: normalizedEmail,
       subject: "Your Replateo Verification Code",
       html: `
