@@ -81,6 +81,25 @@ try {
   console.warn(error.message);
 }
 
+/* =========================
+   🔔 CREATE NOTIFICATION
+========================= */
+async function createNotification(userId, title, message) {
+  try {
+    await admin.firestore().collection("notifications").add({
+      userId: userId,
+      title: title,
+      message: message,
+      read: false,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    console.log("🔔 Notification created for:", userId);
+  } catch (error) {
+    console.error("❌ Notification error:", error);
+  }
+}
+
 app.get("/", (req, res) => {
   res.send("🚀 REPLATEO Backend is running successfully!");
 });
@@ -239,7 +258,19 @@ app.get("/api/reverse-geocode", async (req, res) => {
 
     const data = await response.json();
 
-    res.json(data);
+    const address = data.address;
+
+    const cleanAddress = [
+      address.road,
+      address.suburb,
+      address.city || address.town,
+      address.state,
+      address.postcode
+    ]
+      .filter(Boolean)
+      .join(", ");
+
+    res.json({ display_name: cleanAddress });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch address" });
   }
